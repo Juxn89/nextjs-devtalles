@@ -1,4 +1,11 @@
+import type { Metadata } from 'next';
 import React from 'react'
+
+export const metadata: Metadata = {
+	title: "Pricing",
+	description: "Learn more about our pricing options.",
+	keywords: ["pricing", "cost", "services"],
+};
 
 const PricingPage = () => {
 	return (
