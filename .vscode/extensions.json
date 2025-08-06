@@ -1,10 +1,20 @@
 {
 	"recommendations": [
-		"bradlc.vscode-tailwindcss",
-		"bradlc.vscode-tailwindcss",
-		"burkeholland.simple-react-snippets",
-		"dsznajder.es7-react-js-snippets",
 		"pkief.material-icon-theme",
-		"willstakayama.vscode-nextjs-snippets"
+		"willstakayama.vscode-nextjs-snippets",
+		"yuzu.snippets-next-13",
+		"dsznajder.es7-react-js-snippets",
+		"burkeholland.simple-react-snippets",
+		"formulahendry.auto-close-tag",
+		"formulahendry.auto-rename-tag",
+		"quicktype.quicktype",
+		"pmneo.tsimporter",
+		"clinyong.vscode-css-modules",
+		"mikestead.dotenv",
+		"bradlc.vscode-tailwindcss",
+		"csstools.postcss",
+		"jeff-hykin.better-dockerfile-syntax",
+		"aaron-bond.better-comments",
+		"ms-azuretools.vscode-docker"
 	]
 }
