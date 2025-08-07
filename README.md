@@ -28,7 +28,41 @@ Welcome to the **Next.js [Devtalles](https://cursos.devtalles.com/courses/nextjs
    # or
    yarn dev
    ```
-4. Open your browser at [http://localhost:3000](http://localhost:3000) 🌐
+
+## 🚀 How to run in production mode
+
+To build and run the site in production mode:
+
+1. **Build the project:**
+   ```bash
+   npm run build
+   # or
+   yarn build
+   ```
+2. **Start the production server:**
+   ```bash
+   npm start
+   # or
+   yarn start
+   ```
+
+## 🐳 How to run with Docker
+
+To run the application using Docker:
+
+1. **Build the Docker image:**
+   ```bash
+   docker build -t nextjs-devtalles .
+   ```
+2. **Run the Docker container:**
+   ```bash
+   docker run -p 3000:3000 nextjs-devtalles
+   ```
+The site will be available at [http://localhost:3000](http://localhost:3000) 🌐
+
+> **Note:** You must have Docker Desktop installed.  
+> Download it from: [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
+
 
 ## 📂 Project Structure
 
