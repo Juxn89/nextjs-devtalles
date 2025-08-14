@@ -4,9 +4,9 @@ import { Pokemon } from "@/app/pokemons";
 import { notFound } from "next/navigation";
 
 interface Props {
-	params: {
+	params: Promise<{
 		id: string
-	}
+	}>
 }
 
 const getPokemon = async (id: string): Promise<Pokemon> => {
@@ -28,6 +28,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	catch {
 		notFound()
 	}
+}
+
+export async function generateStaticParams() {
+	const first151Pokemons = Array.from({ length: 151 }, (_, i) => (i + 1).toString());
+
+	return first151Pokemons.map(id => ({ id }));
 }
 
 const PokemonPage = async ({ params }: Props) => {

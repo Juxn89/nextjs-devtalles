@@ -57,6 +57,8 @@ package.json
 
 <img src="https://tailwindcomponents.com/storage/8380/conversions/temp13280-thumb.jpg" alt="Dashboard Example" width="600" style="border-radius:12px;box-shadow:0 2px 8px #0002;margin:1rem 0;" />
 
+- The PokeAPI is used for learning purposes and to demonstrate data fetching, dynamic rendering, and integration with external REST APIs in Next.js.
+
 ## ⚛️ Client Components & State
 
 - <b>useState</b> is used for interactive UI, e.g., the cart counter:
@@ -72,10 +74,10 @@ package.json
 - This project follows best practices for SEO and accessibility.
 - For advanced control over how your dashboard is indexed and displayed in search engines, refer to the official list of [meta tags and attributes that Google supports](https://developers.google.com/search/docs/crawling-indexing/special-tags).
 - Some useful tags include:
-  - <code>&lt;meta name="robots" content="noindex"&gt;</code> — Control indexing and crawling.
-  - <code>&lt;link rel="canonical" href="..."&gt;</code> — Specify the preferred URL for a page.
-  - <code>&lt;meta name="description" content="..."&gt;</code> — Provide a concise page summary.
-  - <code>&lt;meta property="og:title" content="..."&gt;</code> — Open Graph tags for social sharing.
+- <code>&lt;meta name="robots" content="noindex"&gt;</code> — Control indexing and crawling.
+- <code>&lt;link rel="canonical" href="..."&gt;</code> — Specify the preferred URL for a page.
+- <code>&lt;meta name="description" content="..."&gt;</code> — Provide a concise page summary.
+- <code>&lt;meta property="og:title" content="..."&gt;</code> — Open Graph tags for social sharing.
 - For a full list and recommendations, visit the [Google Search Central documentation](https://developers.google.com/search/docs/crawling-indexing/special-tags).
 
 ## 🛠️ Useful Scripts
@@ -92,6 +94,7 @@ package.json
 <li><a href="https://react.dev/" target="_blank">React Docs</a></li>
 <li><a href="https://cursos.devtalles.com/" target="_blank">DevTalles Platform</a></li>
 <li><a href="https://www.creative-tim.com/twcomponents/component/dashboard-navigation" target="_blank">Creative Tim Dashboard Navigation</a></li>
+<li><a href="https://pokeapi.co/" target="_blank">PokeAPI</a></li>
 </ul>
 
 <div align="center" style="margin-top:2rem; font-size:1.2rem;">
