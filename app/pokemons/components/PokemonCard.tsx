@@ -14,17 +14,18 @@ export const PokemonCard = ({ pokemon }: Props) => {
 		<>
 			<div className="mx-auto right-0 mt-2 w-60">
 				<div className="flex flex-col bg-white rounded overflow-hidden shadow-lg">
-					<div className="flex flex-col items-center justify-center text-center p-6 bg-gray-800 border-b">
+					<div className="flex flex-col items-center justify-center text-center p-6 bg-gray-800 border-b min-h-[280px] max-h-[280px]">
 						<Image
 							src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${id}.svg`}
 							width={100}
 							height={100}
 							alt={name}
-							className="mx-auto"
+							className="mx-auto min-h-[100px] max-h-[100px]"
+							priority={ false }
 						/>
 						<p className="pt-2 text-lg font-semibold text-gray-50 capitalize"> {name} </p>
 						<div className="mt-5">
-							<Link href={`/pokemons/${id}`} className="border rounded-full py-2 px-4 text-xs font-semibold text-gray-100">
+							<Link href={`/dashboard/pokemons/${id}`} className="border rounded-full py-2 px-4 text-xs font-semibold text-gray-100">
 								More info
 							</Link>
 						</div>
