@@ -94,6 +94,28 @@ npx prisma migrate dev --name init
 **5. Generate Prisma Client**
 
 Generates the Prisma Client code based on your schema. This is required for your application to interact with the database in a type-safe way.
+```bash
+npx prisma migrate dev --name init
+```
+
+**6. Start the Next.js project**
+
+This command will start the development server.
+```bash
+npx prisma generate
+```
+
+**7. Seed the database**
+
+A special endpoint is available to seed the database with initial data.  
+Visit in your browser or use a tool like curl to access:
+
+``````
+GET http://localhost:3000/api/seed
+
+``````
+
+This will execute the seed and populate the database with sample data.
 
 ---
 
@@ -103,3 +125,20 @@ The database data will be persisted in the `./postgres` folder in your project d
 Default credentials:  
 - user: `postgres`  
 - password: `postgres`
+
+## 📖 Official Documentation Links
+
+<table>
+  <tr>
+    <th>Resource</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><a href="https://nextjs.org/docs/app/api-reference/file-conventions/route" target="_blank">Next.js Route Handlers</a></td>
+    <td>Official documentation for creating API endpoints and custom route handlers in the Next.js App Router.</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.prisma.io/docs/orm/prisma-client/queries/pagination" target="_blank">Prisma Pagination</a></td>
+    <td>Guide to implementing efficient pagination patterns using Prisma Client in your database queries.</td>
+  </tr>
+</table>
