@@ -72,7 +72,7 @@ npm install
 
 **2. Configure .env file**
 
-Rename the `.env.example` file to `.env` and configure your database connection string. For example:
+Create a `.env` file based on the `.env.template` file and configure your database connection string. For example:
 ```
 DATABASE_URL="postgresql://USER:PASSWORD@localhost:5432/mydb?schema=public"
 ```
@@ -95,14 +95,14 @@ npx prisma migrate dev --name init
 
 Generates the Prisma Client code based on your schema. This is required for your application to interact with the database in a type-safe way.
 ```bash
-npx prisma migrate dev --name init
+npx prisma generate
 ```
 
 **6. Start the Next.js project**
 
 This command will start the development server.
 ```bash
-npx prisma generate
+npm run dev
 ```
 
 **7. Seed the database**
@@ -140,5 +140,9 @@ Default credentials:
   <tr>
     <td><a href="https://www.prisma.io/docs/orm/prisma-client/queries/pagination" target="_blank">Prisma Pagination</a></td>
     <td>Guide to implementing efficient pagination patterns using Prisma Client in your database queries.</td>
+  </tr>
+  <tr>
+    <td><a href="https://www.prisma.io/docs/orm/reference/prisma-cli-reference" target="_blank">Prisma CLI Reference</a></td>
+    <td>Comprehensive reference for all Prisma CLI commands, options, and usage examples.</td>
   </tr>
 </table>
