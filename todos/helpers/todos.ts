@@ -1,5 +1,21 @@
 import { Todo } from "@prisma/client";
 
+export const createTodo = async (description: string): Promise<Todo> => {
+	const body = { description }
+
+	const todo = await fetch(`/api/todos/`, {
+		method: 'POST',
+		body: JSON.stringify(body),
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	})
+	.then(response => response.json())
+
+	return todo
+
+}
+
 export const updateTodo = async (id: string, completed: boolean): Promise<Todo> => {
 	const body = { completed }
 
@@ -12,8 +28,5 @@ export const updateTodo = async (id: string, completed: boolean): Promise<Todo> 
 	})
 	.then(response => response.json())
 
-	console.log(todo)
-
 	return todo
-
 }
