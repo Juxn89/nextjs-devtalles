@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { IoTrashOutline } from "react-icons/io5";
-import * as api from '@/todos/helpers/todos';
+// import * as api from '@/todos/helpers/todos';
 import { useRouter } from "next/navigation";
+import { addTodo, deleteCompleted } from "../actions/todoActions";
 
 export const NewTodo = () => { 
 
@@ -15,14 +16,15 @@ export const NewTodo = () => {
 
 		if ( description.length === 0 ) return;
 
-		await api.createTodo( description );
+		// await api.createTodo( description );
+		await addTodo(description)
 		setDescription('');
 
 		router.refresh();
 	}
 
-	const deleteCompleted = async() => {
-		await api.deleteTodoCompleted();
+	const deleteCompletedTodo = async() => {
+		await deleteCompleted();
 
 		router.refresh();
 	}
@@ -43,7 +45,7 @@ export const NewTodo = () => {
       <span className='flex flex-1'></span>
 
       <button 
-        onClick={ () => deleteCompleted() }
+        onClick={ () => deleteCompletedTodo() }
         type='button' className="flex items-center justify-center rounded ml-2 bg-red-400 p-2 text-white hover:bg-red-700 transition-all">
         <IoTrashOutline />
         Delete completed
