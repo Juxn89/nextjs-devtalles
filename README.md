@@ -57,6 +57,27 @@ This branch (<code>03-admintodos-api</code>) covers:
   </tr>
 </table>
 
+## 🧩 Advanced Next.js Features
+
+### Server Actions
+
+Server Actions in Next.js allow you to define asynchronous functions that run securely on the server, enabling direct data mutations and business logic without exposing sensitive code to the client. They simplify data workflows and can be invoked from client components.
+
+- [Server Actions Documentation](https://nextjs.org/docs/app/api-reference/functions/server-actions)
+- [Learn Server Actions (Next.js Dashboard App)](https://nextjs.org/learn/dashboard-app/mutating-data)
+
+### useOptimistic
+
+The `useOptimistic` hook in Next.js enables optimistic UI updates, allowing your interface to reflect changes immediately while awaiting server confirmation. This improves user experience by making applications feel faster and more responsive.
+
+- [useOptimistic Reference](https://nextjs.org/learn/dashboard-app/mutating-data)
+
+### Route Segment Config
+
+Route segment configuration in Next.js allows you to customize the behavior of specific route segments, such as enabling or disabling dynamic rendering, caching, and more.
+
+- [Route Segment Config Documentation](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config)
+
 ## ⚙️ Initial Setup
 
 To get started with this project, follow these steps to configure your local environment and database:
@@ -110,10 +131,9 @@ npm run dev
 A special endpoint is available to seed the database with initial data.  
 Visit in your browser or use a tool like curl to access:
 
-``````
+```
 GET http://localhost:3000/api/seed
-
-``````
+```
 
 This will execute the seed and populate the database with sample data.
 
@@ -144,5 +164,13 @@ Default credentials:
   <tr>
     <td><a href="https://www.prisma.io/docs/orm/reference/prisma-cli-reference" target="_blank">Prisma CLI Reference</a></td>
     <td>Comprehensive reference for all Prisma CLI commands, options, and usage examples.</td>
+  </tr>
+  <tr>
+    <td><a href="https://nextjs.org/docs/app/api-reference/functions/server-actions" target="_blank">Next.js Server Actions</a></td>
+    <td>API reference for defining and using Server Actions in Next.js applications.</td>
+  </tr>
+  <tr>
+    <td><a href="https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config" target="_blank">Next.js Route Segment Config</a></td>
+    <td>Documentation for customizing route segment behavior in the Next.js App Router.</td>
   </tr>
 </table>
