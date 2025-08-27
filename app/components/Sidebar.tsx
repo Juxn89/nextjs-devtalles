@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { CiLogout } from "react-icons/ci"
-import { IoCalendarOutline, IoChatboxOutline } from "react-icons/io5"
+import { IoCalendarOutline, IoChatboxOutline, IoInvertModeOutline } from "react-icons/io5"
 
 import { SidebarItem } from "./SidebarItem"
 
@@ -9,6 +9,7 @@ const menuItems = [
 		{  icon: <IoCalendarOutline />,  title: 'Dashboard', path: '/dashboard'	},
 		{  icon: <IoChatboxOutline />,  title: 'RESTful TODOS', path: '/dashboard/rest-todos'	},
 		{  icon: <IoCalendarOutline />,  title: 'Server Actions', path: '/dashboard/server-todos'	},
+		{  icon: <IoInvertModeOutline />,  title: 'Cookies', path: '/dashboard/cookies'	},
 ]
 
 export const Sidebar = () => {

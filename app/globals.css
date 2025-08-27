@@ -1,4 +1,6 @@
 @import "tailwindcss";
+/* Safe list */
+@source inline("grid-cols-{1..12..1}");
 
 :root {
   --background: #ffffff;
