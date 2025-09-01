@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 import { cookies } from "next/headers";
 import { ItemCard } from "@/shopping-cart";
-import { Product, products } from "@/products/data/products";
 import { WidgetItem } from "@/app/components";
+import { Product, products } from "@/products/data/products";
 
 export const metadata: Metadata = {
 	title: 'Shopping cart',
