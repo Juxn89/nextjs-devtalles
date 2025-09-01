@@ -1,9 +1,9 @@
 import Link from "next/link"
 import Image from "next/image"
-import { CiLogout } from "react-icons/ci"
 import { IoBasketOutline, IoCalendarOutline, IoChatboxOutline, IoInvertModeOutline, IoPersonOutline } from "react-icons/io5"
 
 import { SidebarItem } from "./SidebarItem"
+import { LogoutButton } from "./LogoutButton"
 
 interface Props {
 	image: string;
@@ -45,10 +45,7 @@ export const Sidebar = async ({image, name}: Props) => {
 				</div>
 
 				<div className="px-6 -mx-6 pt-4 flex justify-between items-center border-t">
-					<button className="px-4 py-3 flex items-center space-x-4 rounded-md text-gray-600 group">
-						<CiLogout />
-						<span className="group-hover:text-gray-700">Logout</span>
-					</button>
+						<LogoutButton />
 				</div>
 			</aside>
 		</>
