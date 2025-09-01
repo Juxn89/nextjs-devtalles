@@ -5,6 +5,11 @@ import { IoBasketOutline, IoCalendarOutline, IoChatboxOutline, IoInvertModeOutli
 
 import { SidebarItem } from "./SidebarItem"
 
+interface Props {
+	image: string;
+	name: string
+}
+
 const menuItems = [
 		{  icon: <IoCalendarOutline />,  title: 'Dashboard', path: '/dashboard'	},
 		{  icon: <IoChatboxOutline />,  title: 'RESTful TODOS', path: '/dashboard/rest-todos'	},
@@ -13,7 +18,8 @@ const menuItems = [
 		{  icon: <IoBasketOutline />,  title: 'Products', path: '/dashboard/products'	},
 ]
 
-export const Sidebar = () => {
+export const Sidebar = async ({image, name}: Props) => {
+
 	return (
 		<>
 			<aside className="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r bg-white transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
@@ -25,8 +31,8 @@ export const Sidebar = () => {
 					</div>
 
 					<div className="mt-8 text-center">
-						<Image src="https://i.pinimg.com/736x/38/1e/80/381e80eb3b05a6ad4a12530b24f554f5.jpg" alt="" className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28" width={150} height={150}/>
-							<h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">Peter &ldquo;Spidey&rdquo; Parker</h5>
+						<Image src={ image } alt="" className="w-10 h-10 m-auto rounded-full object-cover lg:w-28 lg:h-28" width={150} height={150}/>
+							<h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">{ name }</h5>
 							<span className="hidden text-gray-400 lg:block">Admin</span>
 					</div>
 
