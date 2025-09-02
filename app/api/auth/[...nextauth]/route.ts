@@ -19,6 +19,29 @@ export const authOptions: NextAuthOptions = {
     }),
     // ...add more providers here
   ],
+	session: {
+		strategy: 'jwt'
+	},
+	callbacks: {
+		async signIn({ user, account, profile, email, credentials }) {
+			return true
+		},
+		async jwt({ token, user, account, profile, isNewUser }) {
+			const dbUser = await prisma.user.findFirst({ where: { email: user?.email } })
+			if (dbUser) {
+				token.id = dbUser.id ?? 'n0-uuid'
+				token.roles = dbUser.roles ?? ['no-roles']
+			}
+			return token
+		},
+		async session({ session, token, user }) {
+			if (session && session.user) {
+				session.user.id = token.id
+				session.user.roles = token.roles
+			}
+			return session
+		}
+	}
 }
 const handler = NextAuth(authOptions)
 export { handler as GET, handler as POST}
