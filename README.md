@@ -78,6 +78,17 @@ Route segment configuration in Next.js allows you to customize the behavior of s
 
 - [Route Segment Config Documentation](https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config)
 
+## 🍪 Cookies & Shopping Cart Functionality
+
+The objective of this section is to demonstrate how to read and write cookies, and how to use server-side cookies to build dynamic content. Key topics include:
+
+- **Server-side cookies:** How to set, read, and manipulate cookies from API routes or server components.
+- **Client-side cookies:** How to access and update cookies from the browser.
+- **Shopping cart:** Using cookies to persist and manage a shopping cart across sessions.
+- **Cookie manipulation:** Best practices for secure and efficient cookie handling.
+
+For more details, see the [Next.js cookies API reference](https://nextjs.org/docs/app/api-reference/functions/cookies).
+
 ## ⚙️ Initial Setup
 
 To get started with this project, follow these steps to configure your local environment and database:
@@ -94,6 +105,7 @@ npm install
 **2. Configure .env file**
 
 Create a `.env` file based on the `.env.template` file and configure your database connection string. For example:
+
 ```
 DATABASE_URL="postgresql://USER:PASSWORD@localhost:5432/mydb?schema=public"
 ```
@@ -122,6 +134,7 @@ npx prisma generate
 **6. Start the Next.js project**
 
 This command will start the development server.
+
 ```bash
 npm run dev
 ```
@@ -146,31 +159,100 @@ Default credentials:
 - user: `postgres`  
 - password: `postgres`
 
+## 🔑 Auth.js Providers Setup
+
+This project uses [Auth.js](https://authjs.dev/) for authentication, with Google and GitHub as providers.  
+To enable these providers, you must create OAuth credentials for each and set the corresponding environment variables in your `.env` file.
+
+### Google Provider
+- Go to the [Google Cloud Console](https://console.cloud.google.com/apis/credentials?pli=1).
+- Create OAuth 2.0 credentials and obtain your **Client ID** and **Client Secret**.
+- Follow the [NextAuth.js Google Provider guide](https://next-auth.js.org/providers/google) for detailed steps.
+- Set the following in your `.env`:
+
+### GitHub Provider
+- Go to [GitHub Developer Settings](https://github.com/settings/developers) > OAuth Apps.
+- Register a new OAuth application and obtain your **Client ID** and **Client Secret**.
+- Follow the [NextAuth.js GitHub Provider guide](https://authjs.dev/reference/core/providers/github).
+- Set the following in your `.env`:
+
+````````markdown
+> For secure session management, generate a strong secret using [Generate Secret (NextAuth.js)](https://generate-secret.vercel.app/32) and set it as `AUTH_SECRET` in your `.env`.
+````````
+---
+
+## 🧪 Testing the Application
+
+You can test the application using the following demo credentials with the Credentials Provider:
+
+- **Email:** `test@example.com`
+- **Password:** `123456`
+
+Use these credentials on the login page to access the app without a third-party provider.
+
+...
+
 ## 📖 Official Documentation Links
 
 <table>
-  <tr>
-    <th>Resource</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td><a href="https://nextjs.org/docs/app/api-reference/file-conventions/route" target="_blank">Next.js Route Handlers</a></td>
-    <td>Official documentation for creating API endpoints and custom route handlers in the Next.js App Router.</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.prisma.io/docs/orm/prisma-client/queries/pagination" target="_blank">Prisma Pagination</a></td>
-    <td>Guide to implementing efficient pagination patterns using Prisma Client in your database queries.</td>
-  </tr>
-  <tr>
-    <td><a href="https://www.prisma.io/docs/orm/reference/prisma-cli-reference" target="_blank">Prisma CLI Reference</a></td>
-    <td>Comprehensive reference for all Prisma CLI commands, options, and usage examples.</td>
-  </tr>
-  <tr>
-    <td><a href="https://nextjs.org/docs/app/api-reference/functions/server-actions" target="_blank">Next.js Server Actions</a></td>
-    <td>API reference for defining and using Server Actions in Next.js applications.</td>
-  </tr>
-  <tr>
-    <td><a href="https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config" target="_blank">Next.js Route Segment Config</a></td>
-    <td>Documentation for customizing route segment behavior in the Next.js App Router.</td>
+<tr>
+  <th>Resource</th>
+  <th>Description</th>
+</tr>
+<tr>
+  <td><a href="https://nextjs.org/docs/app/api-reference/file-conventions/route" target="_blank">Next.js Route Handlers</a></td>
+  <td>Official documentation for creating API endpoints and custom route handlers in the Next.js App Router.</td>
+</tr>
+<tr>
+  <td><a href="https://www.prisma.io/docs/orm/prisma-client/queries/pagination" target="_blank">Prisma Pagination</a></td>
+  <td>Guide to implementing efficient pagination patterns using Prisma Client in your database queries.</td>
+</tr>
+<tr>
+  <td><a href="https://www.prisma.io/docs/orm/reference/prisma-cli-reference" target="_blank">Prisma CLI Reference</a></td>
+  <td>Comprehensive reference for all Prisma CLI commands, options, and usage examples.</td>
+</tr>
+<tr>
+  <td><a href="https://nextjs.org/docs/app/api-reference/functions/server-actions" target="_blank">Next.js Server Actions</a></td>
+  <td>API reference for defining and using Server Actions in Next.js applications.</td>
+</tr>
+<tr>
+  <td><a href="https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config" target="_blank">Next.js Route Segment Config</a></td>
+  <td>Documentation for customizing route segment behavior in the Next.js App Router.</td>
+</tr>
+<tr>
+  <td><a href="https://nextjs.org/docs/app/api-reference/functions/cookies" target="_blank">Next.js Cookies API</a></td>
+  <td>Official API reference for reading, setting, and manipulating cookies in Next.js (server and client).</td>
+</tr>
+<tr>
+  <td><a href="https://next-auth.js.org/deployment" target="_blank">NextAuth.js Deployment</a></td>
+  <td>Best practices and guides for deploying NextAuth.js in production environments.</td>
+</tr>
+<tr>
+  <td><a href="https://generate-secret.vercel.app/32" target="_blank">Generate Secret (NextAuth.js)</a></td>
+  <td>Online tool to generate secure secrets for NextAuth.js configuration.</td>
+</tr>
+<tr>
+  <td><a href="https://next-auth.js.org/providers/google" target="_blank">NextAuth.js Google Provider</a></td>
+  <td>Guide for integrating Google authentication with NextAuth.js.</td>
+</tr>
+<tr>
+  <td><a href="https://authjs.dev/reference/core/providers/github" target="_blank">NextAuth.js GitHub Provider</a></td>
+  <td>Guide for integrating GitHub authentication with Auth.js/NextAuth.js.</td>
+</tr>
+<tr>
+  <td><a href="https://console.cloud.google.com/apis/credentials?pli=1" target="_blank">Google Cloud Credentials</a></td>
+  <td>Google Cloud Console for managing OAuth credentials and API keys.</td>
+</tr>
+<tr>
+  <td><a href="https://github.com/settings/developers" target="_blank">GitHub OAuth Apps</a></td>
+  <td>GitHub Developer Settings for registering OAuth applications.</td>
+</tr>
+<tr>
+  <td><a href="https://next-auth.js.org/providers/credentials" target="_blank">NextAuth.js Credentials Provider</a></td>
+  <td>Guide for implementing custom username/password authentication with NextAuth.js.</td>
+</tr>
+<tr>
+  <td><a href="https://www.prisma.io/docs/concepts/components/prisma-schema/relations" target="_blank">Prisma Schema Relations</a></td>
+  <td>Documentation on defining and working with relations in the Prisma schema.</td>
   </tr>
 </table>

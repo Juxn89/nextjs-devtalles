@@ -16,12 +16,8 @@ export default async function ServerTodosPage() {
 
 	const user = await getUserServerSession()
 
-	console.log(user)
-
 	if(!user)
 		redirect('/api/auth/signin')
-
-	console.log(user)
 
 	const todos = await prisma.todo.findMany({ where: { userId: user.id }, orderBy: { description: 'asc' } })
 
