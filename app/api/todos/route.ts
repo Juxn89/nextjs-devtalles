@@ -2,8 +2,14 @@ import * as yup from 'yup'
 import { NextResponse, NextRequest } from 'next/server'
 
 import prisma from '@/lib/primas';
+import { getUserServerSession } from '@/auth/actions/auth-actions';
 
-export async function GET(request: NextRequest) { 
+export async function GET(request: NextRequest) {
+
+	const user = await getUserServerSession();
+
+	if(!user) 
+		return NextResponse.json({ error: 'No authorized user found' }, { status: 404 });
 
 	const { searchParams } = request.nextUrl;
 	const limit = Number(searchParams.get('limit') ?? '10');
@@ -36,6 +42,12 @@ const postShema = yup.object({
 
 export async function POST(request: NextRequest) {
 	try{
+
+		const user = await getUserServerSession();
+
+		if(!user)
+			return NextResponse.json({ error: 'No authorized user found' }, { status: 404 });
+
 		const body = await request.json();
 
 		await postShema.validate(body);
@@ -45,7 +57,8 @@ export async function POST(request: NextRequest) {
 		const todo = await prisma.todo.create({
 			data: {
 				description,
-				completed
+				completed,
+				userId: user.id
 			}
 		});
 

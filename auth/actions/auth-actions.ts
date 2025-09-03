@@ -1,5 +1,12 @@
-import prisma from "@/lib/primas"
 import bcrypt from 'bcryptjs'
+import { getServerSession } from "next-auth";
+import prisma from "@/lib/primas"
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+
+export const getUserServerSession = async () => {
+	const session = await getServerSession(authOptions);
+	return session?.user;
+}
 
 export const signInEmailPassword = async (email: string, password: string) => {
 	if(!email || !password) return null

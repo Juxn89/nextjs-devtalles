@@ -1,4 +1,5 @@
 import { Todo } from "@/app/generated/prisma/wasm";
+import { getUserServerSession } from "@/auth/actions/auth-actions";
 import prisma from "@/lib/primas";
 import { NextRequest, NextResponse } from "next/server";
 import * as yup from "yup";
@@ -64,7 +65,11 @@ export async function PUT(request: NextRequest, segments: Segments) {
 }
 
 const getTodo = async (id: string): Promise<Todo | null> => {
-	const todo = await prisma.todo.findFirst({ where: { id} })
+	const user = await getUserServerSession();
+
+	if(!user) return null;
+
+	const todo = await prisma.todo.findFirst({ where: { id, userId: user.id } })
 
 	return todo;
 }

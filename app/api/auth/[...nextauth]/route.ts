@@ -44,7 +44,7 @@ export const authOptions: NextAuthOptions = {
 			return true
 		},
 		async jwt({ token, user, account, profile, isNewUser }) {
-			const dbUser = await prisma.user.findFirst({ where: { email: user?.email } })
+			const dbUser = await prisma.user.findFirst({ where: { email: token?.email ?? 'no-email' } })
 
 			if(!dbUser?.isActive)
 				throw new Error('User is not active')
