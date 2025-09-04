@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "a9920667-e995-421d-bcab-a5e8629a7ff6",
+		"name": "Next.js - DevTalles - API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6694946"
+	},
+	"item": [
+		{
+			"name": "Seed",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}seed",
+					"host": [
+						"{{BASE_URL}}seed"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Todos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}todos",
+					"host": [
+						"{{BASE_URL}}todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Todo by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}todos/be06aaa7-f7a3-4d3a-ac47-4440c4972f00",
+					"host": [
+						"{{BASE_URL}}todos"
+					],
+					"path": [
+						"be06aaa7-f7a3-4d3a-ac47-4440c4972f00"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Todos by filters",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}todos?limit=1&offset=2",
+					"host": [
+						"{{BASE_URL}}todos"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "1"
+						},
+						{
+							"key": "offset",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create ToDo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"description\": \"Collect infinity stones\",\r\n\t\"completed\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}todos",
+					"host": [
+						"{{BASE_URL}}todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update ToDo",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"description\": \"Collect infinity stones\",\r\n\t\"completed\": true\r\n}"
+				},
+				"url": {
+					"raw": "{{BASE_URL}}todos/be06aaa7-f7a3-4d3a-ac47-4440c4972f00",
+					"host": [
+						"{{BASE_URL}}todos"
+					],
+					"path": [
+						"be06aaa7-f7a3-4d3a-ac47-4440c4972f00"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:3000/api/"
+		}
+	]
+}
