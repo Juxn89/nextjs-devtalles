@@ -25,6 +25,58 @@ This branch (<code>01-first-steps</code>) contains:
 
 All code and notes are for personal learning and experimentation.
 
+## 🌟 Branch Overview
+
+<div>
+  <div style="min-width: 260px; max-width: 700px; border-radius: 14px; box-shadow: 0 2px 8px #0001; padding: 1.5rem;">
+    <h3 style="margin-top:0;">01-first-steps</h3>
+    <ul style="text-align: left; list-style: none; padding-left: 0;">
+      <li>🔹 Project structure & setup</li>
+      <li>🔹 Routing & navigation</li>
+      <li>🔹 Layouts & nested layouts</li>
+      <li>🔹 Core Next.js concepts</li>
+      <li>🔹 Introduction to <b>useState</b> and client components</li>
+      <li>🔹 Usage of Next.js <code>Link</code> and <code>Image</code> components</li>
+      <li>🔹 Basic HTML structures with Tailwind CSS</li>
+      <li>🔹 Foundation for dynamic metadata and server-side rendering</li>
+    </ul>
+  </div>
+  <div style="min-width: 260px; max-width: 700px; border-radius: 14px; box-shadow: 0 2px 8px #0001; padding: 1.5rem;">
+    <h3 style="margin-top:0;">02-dashboard</h3>
+    <ul style="text-align: left; list-style: none; padding-left: 0;">
+      <li>📊 Dashboard structure & UI with Tailwind CSS for rapid, responsive layouts</li>
+      <li>⚡ Dynamic metadata management for SEO and social sharing</li>
+      <li>🖼️ External image support, optimization, and loading priority</li>
+      <li>🔗 Advanced use of Next.js <code>Link</code> & <code>Image</code> components</li>
+      <li>🔄 Server-side rendering (SSR), static generation (SSG), and revalidation strategies</li>
+      <li>🚦 Custom error pages and argument validation for robust UX</li>
+      <li>🔁 Redirections and seamless navigation</li>
+      <li>🗃️ State management with Redux Toolkit: global state, actions, reducers, and providers</li>
+      <li>🧩 Usage of <code>useDispatch</code> (<code>useAppDispatch</code>) and <code>useSelector</code> (<code>useAppSelector</code>)</li>
+      <li>🛠️ LocalStorage integration with server components for persistent state</li>
+      <li>📦 Modular, scalable project structure for maintainability</li>
+    </ul>
+  </div>
+  <div style="min-width: 260px; max-width: 700px; border-radius: 14px; box-shadow: 0 2px 8px #0001; padding: 1.5rem;">
+    <h3 style="margin-top:0;">03-admin-todos-api</h3>
+    <ul style="text-align: left; list-style: none; padding-left: 0;">
+      <li>🗂️ Full CRUD operations (Read, Update, Post) for todos</li>
+      <li>🔄 Pagination and efficient data fetching</li>
+      <li>🛠️ RESTful API consumption (client & server side)</li>
+      <li>⚡ Server Actions for direct client-server communication (no HTTP needed)</li>
+      <li>🚀 useOptimistic for instant UI updates during async operations</li>
+      <li>🔒 Authentication with <b>Auth.js</b> (Google, GitHub, custom credentials)</li>
+      <li>🔑 Secure password encryption and session management</li>
+      <li>🍪 Cookie management (client & server side)</li>
+      <li>🛡️ Server and client-side validation (Yup)</li>
+      <li>🗃️ Database: Postgres with Prisma ORM (relations, migrations, seed, pull & push)</li>
+      <li>🐳 Dockerized development environment</li>
+      <li>🛒 Shopping cart and user session features</li>
+      <li>🔗 Global user modifications and additional user fields</li>
+    </ul>
+  </div>
+</div>
+
 ## 📚 Useful resources
 
 <ul>
