@@ -2,10 +2,10 @@
   "name": "testo-shop",
   "version": "1.0.0",
   "private": true,
-	"author": {
-		"name": "Juan Gómez",
-		"email": "gb.jc@outlook.com"
-	},
+  "author": {
+    "name": "Juan Gómez",
+    "email": "gb.jc@outlook.com"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -16,7 +16,8 @@
     "next": "15.4.5",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-icons": "5.5.0"
+    "react-icons": "5.5.0",
+    "zustand": "5.0.8"
   },
   "devDependencies": {
     "@eslint/eslintrc": "3",
