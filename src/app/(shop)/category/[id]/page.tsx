@@ -6,9 +6,9 @@ interface Props {
 	}
 }
 
-export default function CategoryPage({ params }: Props) {
+export default async function CategoryPage({ params }: Props) {
 
-	const { id } = params;
+	const { id } = await params;
 
 	if(id === 'kids')
 		notFound()
