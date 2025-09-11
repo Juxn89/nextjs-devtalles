@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import { initialData } from "@/seed/seed";
 import { titleFonts } from "@/config/fonts";
-import { ProductSlideshow, QuantitySelector } from "@/components";
 import { SizeSelector } from "@/components/product/size-selector/SizeSelector";
+import { ProductMobileSlideshow, ProductSlideshow, QuantitySelector } from "@/components";
 
 interface Props {
 	params: {
@@ -18,10 +18,15 @@ export default async function ProductPage({ params }: Props) {
 		notFound()
 
 	return (
-		<div className="mt-5 mb-20 grid md:grid-cols-3 gap-3">
+		<div className="mt-5 mb-20 grid grid-cols-1 md:grid-cols-3 gap-3">
 			{ /* SLIDESHOW */ }
 			<div className="col-span-1 md:col-span-2">
-				<ProductSlideshow images={product.images} title={product.title} className="h-96" />
+
+				{ /* DESKTOP SLIDESHOW */ }
+				<ProductSlideshow images={product.images} title={product.title} className="block md:hidden"/>
+				
+				{ /* MOBILE SLIDESHOW */ }
+				<ProductMobileSlideshow images={product.images} title={product.title} className="hidden md:block" />
 			</div>
 
 			{ /* DETAILS */ }
