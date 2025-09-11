@@ -23,10 +23,10 @@ export default async function ProductPage({ params }: Props) {
 			<div className="col-span-1 md:col-span-2">
 
 				{ /* DESKTOP SLIDESHOW */ }
-				<ProductSlideshow images={product.images} title={product.title} className="block md:hidden"/>
-				
+				<ProductSlideshow images={product.images} title={product.title} className="hidden md:block"/>
+
 				{ /* MOBILE SLIDESHOW */ }
-				<ProductMobileSlideshow images={product.images} title={product.title} className="hidden md:block" />
+				<ProductMobileSlideshow images={product.images} title={product.title} className="block md:hidden" />
 			</div>
 
 			{ /* DETAILS */ }
