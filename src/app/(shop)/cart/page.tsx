@@ -27,7 +27,7 @@ export default function CartPage() {
 							Still looking? Go to shop
 						</Link>
 
-						{ /* CART LIST */ }
+						{ /* CART ITEMS */ }
 						{
 							productsInCart.map(product => (
 								<div key={ product.slug } className="flex mb-5">
@@ -52,7 +52,7 @@ export default function CartPage() {
 					</div>
 
 					{ /* ORDER SUMMARY */ }
-					<div className="bg-white shadow-lg rounded-lg p-7 h-fit mt-5 md:mt-0">
+					<div className="bg-white rounded-xl shadow-xl p-7 h-fit">
 						<h2 className="text-2xl mb-2">Order Summary</h2>
 
 						<div className="grid grid-cols-2">
