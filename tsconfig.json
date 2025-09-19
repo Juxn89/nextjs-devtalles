@@ -18,7 +18,6 @@
         "name": "next"
       }
     ],
-		"rootDir": "./src",
     "paths": {
       "@/*": ["./src/*"]
     }

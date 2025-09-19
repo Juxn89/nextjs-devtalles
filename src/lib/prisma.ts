@@ -1,16 +1,17 @@
-// lib/prismaDynamic.ts
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '../generated/prisma'
 
-type TenantConfig = {
-  databaseUrl: string;
-};
-
-export function createPrismaClient(config: TenantConfig): PrismaClient {
-  return new PrismaClient({
-    datasources: {
-      db: {
-        url: config.databaseUrl,
-      },
-    },
-  });
+const prismaClientSingleton = () => {
+  return new PrismaClient()
 }
+
+type PrismaClientSingleton = ReturnType<typeof prismaClientSingleton>
+
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClientSingleton | undefined
+}
+
+const prisma = globalForPrisma.prisma ?? prismaClientSingleton()
+
+export default prisma
+
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
