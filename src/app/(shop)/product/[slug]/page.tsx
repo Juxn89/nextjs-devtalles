@@ -1,8 +1,11 @@
+// export const revalidate = 604800 // 7 days
+export const revalidate = 10 // 7 days
+
 import { notFound } from "next/navigation";
-import { initialData } from "@/seed/seed";
 import { titleFonts } from "@/config/fonts";
+import { getProductBySlug } from "@/actions";
 import { SizeSelector } from "@/components/product/size-selector/SizeSelector";
-import { ProductMobileSlideshow, ProductSlideshow, QuantitySelector } from "@/components";
+import { ProductMobileSlideshow, ProductSlideshow, QuantitySelector, StockLabel } from "@/components";
 
 interface Props {
 	params: {
@@ -12,7 +15,7 @@ interface Props {
 
 export default async function ProductPage({ params }: Props) {
 	const { slug } = await params;
-	const product = initialData.products.find(product => product.slug === slug);
+	const product = await getProductBySlug(slug);
 
 	if(!product)
 		notFound()
@@ -31,13 +34,15 @@ export default async function ProductPage({ params }: Props) {
 
 			{ /* DETAILS */ }
 			<div className="col-span-1 px-5">
+				<StockLabel slug={ product.slug } />
+				
 				<h1 className={ `${ titleFonts.className } antialiased font-bold text-xl` }>
 					{ product.title}
 				</h1>
 				<p className="text-lg bb-5">${ product.price } </p>
 
 				{ /* SIZES */ }
-				<SizeSelector selectedSize={product.sizes[0]} availableSizes={product.sizes} />
+				<SizeSelector selectedSize={product.size[0]} availableSizes={product.size} />
 
 				{ /* QUANTITY */ }
 				<QuantitySelector quantity={ 2 } />

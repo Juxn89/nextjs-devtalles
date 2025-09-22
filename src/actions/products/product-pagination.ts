@@ -1,12 +1,14 @@
 'use server'
+import { Gender } from '@/generated/prisma';
 import prisma from '@/lib/prisma'
 
 interface PaginationOptions {
 	page?: number;
 	take?: number;
+	gender?: Gender;
 }
 
-export const getPaginatedProductsWithImages = async({ page = 1, take = 12 }: PaginationOptions) => {
+export const getPaginatedProductsWithImages = async({ page = 1, take = 12, gender }: PaginationOptions) => {
 	try {
 
 		if(isNaN(page)) page = 1
@@ -17,11 +19,6 @@ export const getPaginatedProductsWithImages = async({ page = 1, take = 12 }: Pag
 
 		// Fetch products filtered with images, ordered by id for consistent pagination
 		const products = await prisma.product.findMany({
-			orderBy: {
-				id: 'asc',
-			},
-			take: take,
-			skip: (page - 1) * take,
 			include: {
 				ProductImage: { 
 					take: 2,
@@ -29,11 +26,23 @@ export const getPaginatedProductsWithImages = async({ page = 1, take = 12 }: Pag
 						url: true
 					}
 				}
+			},
+			orderBy: {
+				id: 'asc',
+			},
+			take: take,
+			skip: (page - 1) * take,
+			where: {
+				gender: gender
 			}
 		});
 
 		// Get total product count
-		const totalProducts = await prisma.product.count({});
+		const totalProducts = await prisma.product.count({
+			where: {
+				gender
+			}
+		});
 
 		const totalPages = Math.ceil(totalProducts / take);
 
@@ -47,11 +56,6 @@ export const getPaginatedProductsWithImages = async({ page = 1, take = 12 }: Pag
 		}
 	}
 	catch (error) {
-		console.error('Error fetching paginated products with images:', error);
-		return {
-			currentPage: page,
-			totalPages: 0,
-			products: []
-		}
+		throw new Error('Error fetching paginated products with images: ' + (error as Error).message);
 	}
 }
