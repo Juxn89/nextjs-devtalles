@@ -1,3 +1,5 @@
+import { inter } from "@/config/fonts";
+
 export interface Product {
 	id: string;
 	description: string;
@@ -10,6 +12,15 @@ export interface Product {
 	title: string;
 	// type: Type;
 	gender: Category;
+}
+
+export interface CartProduct {
+	id: string;
+	slug: string;
+	title: string;
+	quantity: number;
+	size: Size;
+	image: string;
 }
 
 export type Category = "men" | "women" | "kid" | "unisex";
