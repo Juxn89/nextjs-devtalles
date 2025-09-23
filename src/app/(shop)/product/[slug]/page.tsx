@@ -6,10 +6,26 @@ import { titleFonts } from "@/config/fonts";
 import { getProductBySlug } from "@/actions";
 import { SizeSelector } from "@/components/product/size-selector/SizeSelector";
 import { ProductMobileSlideshow, ProductSlideshow, QuantitySelector, StockLabel } from "@/components";
+import { Metadata } from "next";
 
 interface Props {
 	params: {
 		slug: string
+	}
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+	const { slug } = await params;
+	const product = await getProductBySlug(slug);
+
+	return {
+		title: product.title ?? 'Product not found',
+		description: product?.description ?? '',
+		openGraph: {
+			title: product?.title ?? 'Product not found',
+			description: product?.description ?? '',			
+			images: [ `/product/${product?.images[1]}` ]
+		}
 	}
 }
 
