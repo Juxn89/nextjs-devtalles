@@ -1,5 +1,3 @@
-import { inter } from "@/config/fonts";
-
 export interface Product {
 	id: string;
 	description: string;
