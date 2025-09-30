@@ -4,11 +4,15 @@ import Link from "next/link"
 import { IoCloseOutline, IoLogInOutline, IoLogOutOutline, IoPeopleOutline, IoPersonOutline, IoSearchOutline, IoShirtOutline, IoTicketOutline } from "react-icons/io5"
 import { useUIStore } from "@/store"
 import clsx from "clsx"
+import { logout } from "@/actions/auth/logout"
+import { useSession } from "next-auth/react"
 
 export const Sidebar = () => {
 
 	const isSideMenuOpen = useUIStore(state => state.isSideMenuOpen)
 	const closeSideMenu = useUIStore(state => state.closeSideMenu)
+
+	const { data: session } = useSession()
 
 	return (
 		<div>
@@ -47,7 +51,8 @@ export const Sidebar = () => {
 				</div>
 
 				<Link
-					href={ '/' }
+					href={ '/profile' }
+					onClick={ () => { closeSideMenu() } }
 					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
 				>
 					<IoPersonOutline size={ 30 } />
@@ -63,20 +68,20 @@ export const Sidebar = () => {
 				</Link>
 
 				<Link
-					href={ '/' }
+					href={ '/auth/login' }
 					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
 				>
 					<IoLogInOutline size={ 30 } />
 					<span className="ml-3 text-xl">Sign In</span>
 				</Link>
 
-				<Link
-					href={ '/' }
-					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+				<button
+					onClick={ () => { logout() } }
+					className="w-full flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
 				>
 					<IoLogOutOutline size={ 30 } />
 					<span className="ml-3 text-xl">Sign Out</span>
-				</Link>
+				</button>
 
 				<div className="w-full h-px bg-gray-200 my-10" />
 

@@ -1,17 +1,22 @@
 'use server'
 
 import { signIn } from '@/auth.config'
+import { sleep } from '@/utils'
 
 export async function authenticate(prevState: string | undefined, formData: FormData) {
 	try {
-		console.log('Login action called with:', Object.fromEntries(formData))
-		await signIn('credentials', formData)
-	} catch (error) {
-		return 'CredentialsSignin'
-		// if( (error as Error).message.includes('CredentialsSignin')) {
-		// 	return 'Credentials are invalid'
-		// }
+		await sleep(2)
 
-		// throw error
+		await signIn('credentials', {
+			...Object.fromEntries(formData),
+			redirect: false
+		})
+
+		return 'SUCCESS'
+	} catch (error) {
+		if( (error as Error).message.includes('CredentialsSignin'))
+			return 'CREDENTIALS_INVALID'
+
+		return 'UNKNOWN_ERROR'
 	}
 }

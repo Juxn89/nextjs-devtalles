@@ -15,8 +15,6 @@ export const getPaginatedProductsWithImages = async({ page = 1, take = 12, gende
 
 		if(page < 1) page = 1
 
-		console.log({ page, take, skip: (page - 1) * take })
-
 		// Fetch products filtered with images, ordered by id for consistent pagination
 		const products = await prisma.product.findMany({
 			include: {
