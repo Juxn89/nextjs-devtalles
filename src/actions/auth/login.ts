@@ -4,12 +4,14 @@ import { signIn } from '@/auth.config'
 
 export async function authenticate(prevState: string | undefined, formData: FormData) {
 	try {
-		await signIn('credentials', Object.fromEntries(formData))
+		console.log('Login action called with:', Object.fromEntries(formData))
+		await signIn('credentials', formData)
 	} catch (error) {
-		if( (error as Error).message.includes('CredentialsSignin')) {
-			return 'Credentials are invalid'
-		}
+		return 'CredentialsSignin'
+		// if( (error as Error).message.includes('CredentialsSignin')) {
+		// 	return 'Credentials are invalid'
+		// }
 
-		throw error
+		// throw error
 	}
 }

@@ -1,49 +1,114 @@
-import { PrismaClient, Prisma } from "@/generated/prisma";
-import { initialData } from "@/seed/seed";
+import { PrismaClient } from '@prisma/client'
+import { initialData } from '../src/seed/seed'
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 
-const productData: Prisma.ProductCreateInput[] = initialData.products.map(product => ({
-	description: product.description,
-	inStock: product.inStock,
-	price: product.price,
-	slug: product.slug,
-	title: product.title,
-	gender: product.gender,
-	ProductImage: {
-		create: product.images.map(image => ({
-			url: image ?? ''
-		}))
-	},
-	category: {
-		connectOrCreate: {
-			where: { name: product.type },
-			create: { name: product.type }
-		}
-	},
-	size: product.sizes,
-	tags: product.tags,
-}))
+async function main() {
+  console.log('🌱 Seeding...')
 
-export async function seedDatabase() {
-	console.log('Starting database seeding...')
-	
-	console.log('Clearing existing data...')
+  // Limpiar datos existentes
+  await prisma.productImage.deleteMany()
+  await prisma.product.deleteMany()
+  await prisma.category.deleteMany()
+  await prisma.user.deleteMany()
 
-	await	prisma.productImage.deleteMany()
-	await	prisma.product.deleteMany()
-	await	prisma.category.deleteMany()
-	
-	console.log('Seeding database...')
+  console.log('✅ Database cleared')
 
-	for (const product of productData) {
-		await prisma.product.create({
-			data: product
-		})
-	}
+  // Crear usuarios
+  console.log('👥 Creating users...')
+  
+  // Generar IDs únicos para usuarios
+  const adminUserId = 'admin-user-' + Date.now()
+  const regularUserId = 'user-regular-' + Date.now()
+  
+  await prisma.user.create({
+    data: {
+      id: adminUserId,
+      name: initialData.users[0].name,
+      email: initialData.users[0].email,
+      password: initialData.users[0].password,
+      role: initialData.users[0].role as 'admin' | 'user',
+      emailVerified: true,
+    }
+  })
 
-	console.log('Database seeded successfully.')
+  await prisma.user.create({
+    data: {
+      id: regularUserId,
+      name: initialData.users[1].name,
+      email: initialData.users[1].email,
+      password: initialData.users[1].password,
+      role: initialData.users[1].role as 'admin' | 'user',
+      emailVerified: true,
+    }
+  })
 
+  console.log('✅ Users created')
+
+  // Crear categorías
+  console.log('📂 Creating categories...')
+  const categories = ['shirts', 'pants', 'hoodies', 'hats']
+  
+  for (const categoryName of categories) {
+    await prisma.category.create({
+      data: {
+        name: categoryName
+      }
+    })
+  }
+
+  console.log('✅ Categories created')
+
+  // Crear productos
+  console.log('🛍️ Creating products...')
+  
+  for (const product of initialData.products) {
+    // Buscar la categoría correspondiente
+    const category = await prisma.category.findUnique({
+      where: { name: product.type }
+    })
+    
+    if (!category) {
+      console.log(`⚠️ Category ${product.type} not found for product ${product.title}`)
+      continue
+    }
+
+    // Crear el producto
+    const createdProduct = await prisma.product.create({
+      data: {
+        title: product.title,
+        description: product.description,
+        inStock: product.inStock,
+        price: product.price,
+        size: product.sizes.map(size => size as any),
+        slug: product.slug,
+        tags: product.tags,
+        gender: product.gender as 'men' | 'women' | 'kid' | 'unisex',
+        categoryId: category.id,
+      }
+    })
+
+    // Crear las imágenes del producto
+    for (const image of product.images) {
+      await prisma.productImage.create({
+        data: {
+          url: image,
+          productId: createdProduct.id
+        }
+      })
+    }
+  }
+
+  console.log('✅ Products and images created')
+  console.log('🎉 Seeding completed successfully!')
 }
 
-seedDatabase()
+main()
+  .catch((e) => {
+    console.error('❌ Error during seeding:')
+    console.error(e)
+    process.exit(1)
+  })
+  .finally(async () => {
+    await prisma.$disconnect()
+  })

@@ -1,12 +1,19 @@
-import type { NextAuthConfig } from 'next-auth';
-import NextAuth from 'next-auth';
-import Credentials from 'next-auth/providers/credentials';
 import z from 'zod';
+import bcryptjs from 'bcryptjs';
+import NextAuth from 'next-auth';
+import type { NextAuthConfig } from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
+import prisma from './lib/prisma';
  
 export const authConfig: NextAuthConfig = {
+	// Usar JWT strategy (sin base de datos para sesiones)
+	session: {
+		strategy: 'jwt',
+	},
 	pages: {
 		signIn: '/auth/login',
 		newUser: '/auth/new-account',
+		error: '/auth/login'
 	},
 	providers: [
 		Credentials({
@@ -18,12 +25,32 @@ export const authConfig: NextAuthConfig = {
 				if(!parsedCredentials.success) return null
 				
 				const { email, password } = parsedCredentials.data
-				console.log({ email, password })
 
-				return {}
+				const user = await prisma.user.findUnique({ where: { email: email.toLowerCase() } })
+				if(!user) return null
+
+				const isValidPassword = bcryptjs.compareSync(password, user.password)
+				if(!isValidPassword) return null
+
+				const { password: _password, ...userData } = user
+				console.log(userData)
+				return userData
 			}
 		})
-	]
+	],
+	callbacks: {
+		jwt({ token, user }) {
+			if (user) { // User is available during sign-in
+				token.role = user.role
+			}
+			return token
+		},
+		session({ session, token }) {
+			session.user.role = token.role
+			session.user.id = token.sub
+			return session
+		},
+	}
 };
 
 export const { signIn, signOut, auth } = NextAuth(authConfig)
