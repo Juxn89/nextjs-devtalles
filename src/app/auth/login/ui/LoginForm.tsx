@@ -5,16 +5,14 @@ import { useActionState, useEffect } from 'react'
 import { IoInformationOutline } from 'react-icons/io5'
 import { authenticate } from '@/actions'
 import { LoginButton } from './LoginButton'
-import { useRouter } from 'next/navigation'
 
 export const LoginForm = () => {
 
 	const [ state, formAction ] = useActionState(authenticate, undefined)
-	const router = useRouter()
 
 	useEffect(() => {
 		if (state === 'SUCCESS')
-			router.replace('/')
+			window.location.replace('/')
 	}, [state])
 
 	return (
@@ -35,7 +33,7 @@ export const LoginForm = () => {
 				/>
 
 				<div 
-					className="flex h-8 items-end- space-x-1"
+					className="flex h-8 items-end space-x-1"
 					aria-live='polite'
 					aria-atomic='true'
 				>

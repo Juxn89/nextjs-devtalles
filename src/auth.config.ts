@@ -33,21 +33,20 @@ export const authConfig: NextAuthConfig = {
 				if(!isValidPassword) return null
 
 				const { password: _password, ...userData } = user
-				console.log(userData)
+
 				return userData
 			}
 		})
 	],
 	callbacks: {
 		jwt({ token, user }) {
-			if (user) { // User is available during sign-in
-				token.role = user.role
+			if (user) {
+				token.data = user
 			}
 			return token
 		},
 		session({ session, token }) {
-			session.user.role = token.role
-			session.user.id = token.sub
+			session.user = token.data
 			return session
 		},
 	}

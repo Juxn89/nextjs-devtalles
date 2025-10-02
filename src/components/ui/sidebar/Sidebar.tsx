@@ -1,9 +1,9 @@
 'use client'
 
 import Link from "next/link"
+import clsx from "clsx"
 import { IoCloseOutline, IoLogInOutline, IoLogOutOutline, IoPeopleOutline, IoPersonOutline, IoSearchOutline, IoShirtOutline, IoTicketOutline } from "react-icons/io5"
 import { useUIStore } from "@/store"
-import clsx from "clsx"
 import { logout } from "@/actions/auth/logout"
 import { useSession } from "next-auth/react"
 
@@ -13,7 +13,9 @@ export const Sidebar = () => {
 	const closeSideMenu = useUIStore(state => state.closeSideMenu)
 
 	const { data: session } = useSession()
-
+	const isAuthenticated = !!session?.user
+	const isAdmin = session?.user?.role === 'admin'
+	
 	return (
 		<div>
 			{ /* Overlay */ }
@@ -50,64 +52,85 @@ export const Sidebar = () => {
 					/>
 				</div>
 
-				<Link
-					href={ '/profile' }
-					onClick={ () => { closeSideMenu() } }
-					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
-				>
-					<IoPersonOutline size={ 30 } />
-					<span className="ml-3 text-xl">Profile</span>
-				</Link>
+				{
+					isAuthenticated && (
+						<>
+							<Link
+								href={ '/profile' }
+								onClick={ () => { closeSideMenu() } }
+								className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+							>
+								<IoPersonOutline size={ 30 } />
+								<span className="ml-3 text-xl">Profile</span>
+							</Link>
 
-				<Link
-					href={ '/' }
-					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
-				>
-					<IoTicketOutline size={ 30 } />
-					<span className="ml-3 text-xl">Orders</span>
-				</Link>
+							<Link
+								href={ '/' }
+								className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+							>
+								<IoTicketOutline size={ 30 } />
+								<span className="ml-3 text-xl">Orders</span>
+							</Link>						
+						</>
+					)
+				}
 
-				<Link
-					href={ '/auth/login' }
-					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
-				>
-					<IoLogInOutline size={ 30 } />
-					<span className="ml-3 text-xl">Sign In</span>
-				</Link>
+				{
+					isAuthenticated && (
+						<button
+							onClick={ () => { logout() } }
+							className="w-full flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+						>
+							<IoLogOutOutline size={ 30 } />
+							<span className="ml-3 text-xl">Sign Out</span>
+						</button>
+					)
+				}
 
-				<button
-					onClick={ () => { logout() } }
-					className="w-full flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
-				>
-					<IoLogOutOutline size={ 30 } />
-					<span className="ml-3 text-xl">Sign Out</span>
-				</button>
+				{
+					!isAuthenticated && (
+						<Link
+							href={ '/auth/login' }
+							className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+						>
+							<IoLogInOutline size={ 30 } />
+							<span className="ml-3 text-xl">Sign In</span>
+						</Link>
+					)
+				}
 
 				<div className="w-full h-px bg-gray-200 my-10" />
 
-				<Link
-					href={ '/' }
-					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
-				>
-					<IoShirtOutline size={ 30 } />
-					<span className="ml-3 text-xl">Products</span>
-				</Link>
+				{
+					isAdmin && (
+						<>
+							<Link
+								href={ '/' }
+								className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+							>
+								<IoShirtOutline size={ 30 } />
+								<span className="ml-3 text-xl">Products</span>
+							</Link>
 
-				<Link
-					href={ '/' }
-					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
-				>
-					<IoTicketOutline size={ 30 } />
-					<span className="ml-3 text-xl">Orders</span>
-				</Link>
+							<Link
+								href={ '/' }
+								className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+							>
+								<IoTicketOutline size={ 30 } />
+								<span className="ml-3 text-xl">Orders</span>
+							</Link>
 
-				<Link
-					href={ '/' }
-					className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
-				>
-					<IoPeopleOutline size={ 30 } />
-					<span className="ml-3 text-xl">Users</span>
-				</Link>
+							<Link
+								href={ '/' }
+								className="flex items-center mt-10 p-2 hover:bg-gray-100 rounded transition-all"
+							>
+								<IoPeopleOutline size={ 30 } />
+								<span className="ml-3 text-xl">Users</span>
+							</Link>						
+						</>
+					)
+				}
+
 			</nav>
 		</div>
 	)

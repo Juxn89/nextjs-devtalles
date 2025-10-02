@@ -18,8 +18,8 @@ async function main() {
   console.log('👥 Creating users...')
   
   // Generar IDs únicos para usuarios
-  const adminUserId = 'admin-user-' + Date.now()
-  const regularUserId = 'user-regular-' + Date.now()
+  const adminUserId = '495e7bac-be94-4ac1-9faa-7c7bca7ef70e'
+  const regularUserId = '164830be-b078-470d-b68a-484582335b10'
   
   await prisma.user.create({
     data: {
@@ -100,7 +100,7 @@ async function main() {
   }
 
   console.log('✅ Products and images created')
-  console.log('🎉 Seeding completed successfully!')
+  console.log('\n\n🎉 Seeding completed successfully!')
 }
 
 main()
