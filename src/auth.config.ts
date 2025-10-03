@@ -49,6 +49,9 @@ export const authConfig: NextAuthConfig = {
 			session.user = token.data
 			return session
 		},
+		authorized({ auth, request }) {
+			return true
+		}
 	}
 };
 
