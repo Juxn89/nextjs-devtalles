@@ -7,6 +7,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Size {
+  XS
+  S
+  M
+  L
+  XL
+  XXL
+  XXXL
+}
+
+enum Gender {
+  men
+  women
+  kid
+  unisex
+}
+
+enum Role {
+  admin
+  user
+}
+
 model Category {
   id       String    @id @default(uuid())
   name     String    @unique
@@ -48,24 +70,7 @@ model User {
   image                 String?
 }
 
-enum Size {
-  XS
-  S
-  M
-  L
-  XL
-  XXL
-  XXXL
-}
-
-enum Gender {
-  men
-  women
-  kid
-  unisex
-}
-
-enum Role {
-  admin
-  user
+model Countryies {
+	id String @id
+	name String @unique
 }

@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { initialData } from '../src/seed/seed'
+import { countries } from '@/seed/seed-countries'
 
 const prisma = new PrismaClient()
 
@@ -11,6 +12,7 @@ async function main() {
   await prisma.product.deleteMany()
   await prisma.category.deleteMany()
   await prisma.user.deleteMany()
+	await prisma.countryies.deleteMany()
 
   console.log('✅ Database cleared')
 
@@ -100,6 +102,13 @@ async function main() {
   }
 
   console.log('✅ Products and images created')
+	
+	await prisma.countryies.createMany({
+		data: [ ...countries ],
+	})
+
+	console.log('🗺️ Countries created')
+
   console.log('\n\n🎉 Seeding completed successfully!')
 }
 
