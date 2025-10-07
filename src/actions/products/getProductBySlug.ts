@@ -4,10 +4,10 @@ import prisma from "@/lib/prisma";
 
 export const getProductBySlug = async (slug: string) => {
 	try {
-		const product = await prisma.product.findUnique({
+		const product = await prisma.products.findUnique({
 			where: { slug },
 			include: {
-				ProductImage: {
+				ProductImages: {
 					select: {
 						url: true,
 					}
@@ -21,7 +21,7 @@ export const getProductBySlug = async (slug: string) => {
 		return {
 			...product,
 			sizes: [...product.size],
-			images: product.ProductImage.map(img => img.url)
+			images: product.ProductImages.map(img => img.url)
 		};
 
 	} catch (error) {

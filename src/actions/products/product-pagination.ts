@@ -16,9 +16,9 @@ export const getPaginatedProductsWithImages = async({ page = 1, take = 12, gende
 		if(page < 1) page = 1
 
 		// Fetch products filtered with images, ordered by id for consistent pagination
-		const products = await prisma.product.findMany({
+		const products = await prisma.products.findMany({
 			include: {
-				ProductImage: { 
+				ProductImages: { 
 					take: 2,
 					select: {
 						url: true
@@ -36,7 +36,7 @@ export const getPaginatedProductsWithImages = async({ page = 1, take = 12, gende
 		});
 
 		// Get total product count
-		const totalProducts = await prisma.product.count({
+		const totalProducts = await prisma.products.count({
 			where: {
 				gender
 			}
@@ -49,7 +49,7 @@ export const getPaginatedProductsWithImages = async({ page = 1, take = 12, gende
 			totalPages,
 			products: products.map(product => ({
 				...product,
-				images: product.ProductImage.map(image => image.url)
+				images: product.ProductImages.map(image => image.url)
 			})),
 		}
 	}

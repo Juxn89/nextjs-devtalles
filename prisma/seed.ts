@@ -8,11 +8,11 @@ async function main() {
   console.log('🌱 Seeding...')
 
   // Limpiar datos existentes
-  await prisma.productImage.deleteMany()
-  await prisma.product.deleteMany()
-  await prisma.category.deleteMany()
-  await prisma.user.deleteMany()
-	await prisma.countryies.deleteMany()
+  await prisma.productImages.deleteMany()
+  await prisma.products.deleteMany()
+  await prisma.categories.deleteMany()
+  await prisma.users.deleteMany()
+	await prisma.countries.deleteMany()
 
   console.log('✅ Database cleared')
 
@@ -23,7 +23,7 @@ async function main() {
   const adminUserId = '495e7bac-be94-4ac1-9faa-7c7bca7ef70e'
   const regularUserId = '164830be-b078-470d-b68a-484582335b10'
   
-  await prisma.user.create({
+  await prisma.users.create({
     data: {
       id: adminUserId,
       name: initialData.users[0].name,
@@ -34,7 +34,7 @@ async function main() {
     }
   })
 
-  await prisma.user.create({
+  await prisma.users.create({
     data: {
       id: regularUserId,
       name: initialData.users[1].name,
@@ -52,7 +52,7 @@ async function main() {
   const categories = ['shirts', 'pants', 'hoodies', 'hats']
   
   for (const categoryName of categories) {
-    await prisma.category.create({
+    await prisma.categories.create({
       data: {
         name: categoryName
       }
@@ -66,7 +66,7 @@ async function main() {
   
   for (const product of initialData.products) {
     // Buscar la categoría correspondiente
-    const category = await prisma.category.findUnique({
+    const category = await prisma.categories.findUnique({
       where: { name: product.type }
     })
     
@@ -76,7 +76,7 @@ async function main() {
     }
 
     // Crear el producto
-    const createdProduct = await prisma.product.create({
+    const createdProduct = await prisma.products.create({
       data: {
         title: product.title,
         description: product.description,
@@ -92,7 +92,7 @@ async function main() {
 
     // Crear las imágenes del producto
     for (const image of product.images) {
-      await prisma.productImage.create({
+      await prisma.productImages.create({
         data: {
           url: image,
           productId: createdProduct.id
@@ -102,12 +102,14 @@ async function main() {
   }
 
   console.log('✅ Products and images created')
-	
-	await prisma.countryies.createMany({
+
+	console.log('🗺️ Creating Countries...')
+
+	await prisma.countries.createMany({
 		data: [ ...countries ],
 	})
 
-	console.log('🗺️ Countries created')
+	console.log('✅ Countries created')
 
   console.log('\n\n🎉 Seeding completed successfully!')
 }

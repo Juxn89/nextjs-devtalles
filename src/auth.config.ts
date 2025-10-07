@@ -26,7 +26,7 @@ export const authConfig: NextAuthConfig = {
 				
 				const { email, password } = parsedCredentials.data
 
-				const user = await prisma.user.findUnique({ where: { email: email.toLowerCase() } })
+				const user = await prisma.users.findUnique({ where: { email: email.toLowerCase() } })
 				if(!user) return null
 
 				const isValidPassword = bcryptjs.compareSync(password, user.password)

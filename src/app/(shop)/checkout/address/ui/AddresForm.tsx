@@ -1,9 +1,12 @@
 "use client";
 
-import { Country } from "@/interfaces";
 import clsx from "clsx";
-import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { Country } from "@/interfaces";
+import { useAddressStore } from "@/store";
+import { useEffect } from "react";
+import { setUserAddress } from "@/actions";
+import { useSession } from "next-auth/react";
 
 type FormInputs = {
 	firstName: string;
@@ -22,12 +25,26 @@ interface Props {
 }
 
 export const AddresForm = ({ countries }: Props) => {
-	const { register, handleSubmit, formState: { isValid, errors } } = useForm<FormInputs>({
+
+	const { data: session } = useSession({ required: true })
+	const setAddress = useAddressStore(state => state.setAddress)
+	const address = useAddressStore(state => state.address)
+
+	const { register, handleSubmit, formState: { isValid }, reset } = useForm<FormInputs>({
 		defaultValues: { }
 	})
 
+	useEffect( () => {
+		if(address.firstName)
+			reset(address)
+	}, [address] )
+
 	const onSubmit = (data: FormInputs) => {
-		console.log(data);
+		setAddress(data)
+
+		if(data.rememberAddress) {
+			setUserAddress(data, session?.user.id!)
+		}
 	}
 	
 	return (
