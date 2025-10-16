@@ -11,6 +11,7 @@ async function main() {
   await prisma.productImages.deleteMany()
   await prisma.products.deleteMany()
   await prisma.categories.deleteMany()
+	await prisma.userAddresses.deleteMany()
   await prisma.users.deleteMany()
 	await prisma.countries.deleteMany()
 
