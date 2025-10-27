@@ -4,9 +4,11 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 import { useCartStore } from "@/store"
 import { currencyFormat } from "@/utils/currenctFormat"
+import { sleep } from "@/utils"
 
 export const OrderSummary = () => {	
 	const [loaded, setLoaded] = useState(false)
+
 	const getSummaryInformation = useCartStore(state => state.getSummaryInformation )
 	const { subTotal, totalTax, total, totalItemsInCart } = getSummaryInformation()
 	
