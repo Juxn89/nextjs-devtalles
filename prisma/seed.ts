@@ -8,6 +8,9 @@ async function main() {
   console.log('🌱 Seeding...')
 
   // Limpiar datos existentes
+	await prisma.orderAddress.deleteMany()
+	await prisma.orderItem.deleteMany()
+	await prisma.order.deleteMany()
   await prisma.productImages.deleteMany()
   await prisma.products.deleteMany()
   await prisma.categories.deleteMany()
