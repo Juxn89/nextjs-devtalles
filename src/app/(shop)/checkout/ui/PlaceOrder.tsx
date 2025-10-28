@@ -32,7 +32,6 @@ export const PlaceOrder = () => {
 		}))
 
 		const response = await placeOrder(productsToOrder, address)
-		console.log(response)
 
 		setIsPlacingOrder(false)
 	}
