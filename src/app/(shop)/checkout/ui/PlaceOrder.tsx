@@ -5,15 +5,19 @@ import { useEffect, useState } from "react";
 import { currencyFormat } from "@/utils";
 import { useAddressStore, useCartStore } from "@/store";
 import { placeOrder } from "@/actions";
+import { useRouter } from "next/navigation";
 
 export const PlaceOrder = () => {
+	const router = useRouter()
 
 	const [loaded, setLoaded] = useState<boolean>()
+	const [errorMessage, setErrorMessage] = useState<string>('')
 	const [isPlacingOrder, setIsPlacingOrder] = useState(false)
 
-	const address = useAddressStore(state => state.address)
-	const getSummaryInformation = useCartStore(state => state.getSummaryInformation )
 	const cart = useCartStore(state => state.cart)
+	const address = useAddressStore(state => state.address)
+	const clearCart = useCartStore(state => state.clearCart)
+	const getSummaryInformation = useCartStore(state => state.getSummaryInformation )
 	
 	const { city, country, phone, firstName, lastName, address: street } = address
 	const { subTotal, totalTax, total, totalItemsInCart } = getSummaryInformation()
@@ -32,14 +36,20 @@ export const PlaceOrder = () => {
 		}))
 
 		const response = await placeOrder(productsToOrder, address)
+		if(!response.ok) {
+			setIsPlacingOrder(false)
+			setErrorMessage(response.message)
 
-		setIsPlacingOrder(false)
+			return;
+		}
+
+		clearCart()
+		router.replace(`/orders/${response.order?.id}`)
 	}
 
 	if(!loaded) {
 		return <p>Loading...</p>
 	}
-	
 
 	return (
 		<div className="bg-white shadow-lg rounded-lg p-7 h-fit mt-5 md:mt-0">
@@ -84,7 +94,9 @@ export const PlaceOrder = () => {
 					</span>
 				</p>
 
-				<p className="text-red-500">Error while placing order</p>
+				{  
+					errorMessage.length > 0 && <p className="text-red-500">{errorMessage}</p>
+				}
 
 				<button
 					className={

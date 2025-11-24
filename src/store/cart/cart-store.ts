@@ -14,6 +14,7 @@ interface State {
 		total: number,
 		totalItemsInCart: number,
 	};
+	clearCart: () => void;
 }
 
 const TAX_RATE = 0.15
@@ -86,6 +87,9 @@ export const useCartStore = create<State>()(
 					total,
 					totalItemsInCart
 				}
+			},
+			clearCart: () => {
+				set({ cart: [] });
 			}
 		}),
 		{
