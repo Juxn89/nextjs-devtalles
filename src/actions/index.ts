@@ -1,12 +1,17 @@
-export { authenticate, login } from './auth/login'
-export { deleteUserAddress } from './address/delete-user-address'
-export { getCountries } from './countries/get-countries'
-export { getOrderByID } from './order/get-order-by-id'
-export { getPaginatedProductsWithImages } from './products/product-pagination'
-export { getProductBySlug } from './products/getProductBySlug'
-export { getStockBySlug } from './products/getStockBySlug'
-export { getUserAddress } from './address/get-user-address'
 export { logout } from './auth/logout'
-export { placeOrder } from './order/place-order'
 export { registerUser } from './auth/register'
+export { authenticate, login } from './auth/login'
+
 export { setUserAddress } from './address/set-user-address'
+export { getUserAddress } from './address/get-user-address'
+export { deleteUserAddress } from './address/delete-user-address'
+
+export { getCountries } from './countries/get-countries'
+
+export { getStockBySlug } from './products/getStockBySlug'
+export { getProductBySlug } from './products/getProductBySlug'
+export { getPaginatedProductsWithImages } from './products/product-pagination'
+
+export { placeOrder } from './order/place-order'
+export { getOrderByID } from './order/get-order-by-id'
+export { getOrdersByUser } from './order/get-orders-by-user'
