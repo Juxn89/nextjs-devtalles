@@ -1,4 +1,4 @@
-'user server'
+'use server'
 
 import { auth } from "@/auth.config"
 import prisma from "@/lib/prisma"
