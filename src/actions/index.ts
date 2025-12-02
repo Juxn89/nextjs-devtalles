@@ -16,4 +16,5 @@ export { placeOrder } from './order/place-order'
 export { getOrderByID } from './order/get-order-by-id'
 export { getOrdersByUser } from './order/get-orders-by-user'
 
+export { paypalCheckPayment } from './payments/paypal-payment'
 export { setTransactionId } from './payments/set-transaction-id'
