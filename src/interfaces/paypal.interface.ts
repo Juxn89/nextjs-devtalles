@@ -7,10 +7,10 @@ export interface PayPalAuthResult {
   nonce: string
 }
 
-export interface PayPalOrdersResult {
+export interface PayPalOrdersStatusResponse {
   id: string
   intent: string
-  status: string
+  status: 'CREATED' | 'SAVED' | 'APPROVED' | 'VOIDED' | 'COMPLETED' | 'PAYER_ACTION_REQUIRED'
   purchase_units: PurchaseUnit[]
   create_time: string
   links: Link[]
@@ -21,6 +21,7 @@ export interface PurchaseUnit {
   amount: Amount
   payee: Payee
   supplementary_data: SupplementaryData
+	invoice_id: string
 }
 
 export interface Amount {
@@ -34,6 +35,7 @@ export interface Payee {
 }
 
 export interface SupplementaryData {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   tax_nexus: any[]
 }
 
