@@ -15,6 +15,10 @@ export { getPaginatedProductsWithImages } from './products/product-pagination'
 export { placeOrder } from './order/place-order'
 export { getOrderByID } from './order/get-order-by-id'
 export { getOrdersByUser } from './order/get-orders-by-user'
+export { getPaginatedOrders } from './order/get-paginated-orders'
 
 export { paypalCheckPayment } from './payments/paypal-payment'
 export { setTransactionId } from './payments/set-transaction-id'
+
+export { changeUserRole } from './users/change-user-role'
+export { getPaginatedUsers } from './users/get-paginater-users'
