@@ -1,12 +1,12 @@
 // export const revalidate = 604800 // 7 days
 export const revalidate = 10 // 7 days
 
-import { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { AddToCart } from './ui/AddToCart';
-import { titleFonts } from "@/config/fonts";
-import { getProductBySlug } from "@/actions";
-import { ProductMobileSlideshow, ProductSlideshow, StockLabel } from "@/components";
+import { titleFonts } from '@/config/fonts';
+import { getProductBySlug } from '@/actions';
+import { ProductMobileSlideshow, ProductSlideshow, StockLabel } from '@/components';
 
 interface Props {
 	params: {
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const product = await getProductBySlug(slug);
 
 	return {
-		title: product.title ?? 'Product not found',
+		title: product?.title ?? 'Product not found',
 		description: product?.description ?? '',
 		openGraph: {
 			title: product?.title ?? 'Product not found',

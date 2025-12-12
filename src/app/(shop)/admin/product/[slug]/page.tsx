@@ -23,14 +23,14 @@ export default async function ProductPage({ params }: Props) {
 
 	const title = slug === 'new' ? 'New product' : 'Edit product'
 
-	if(!product)
+	if(!product && slug !== 'new')
 		redirect('/admin/products')
 
 	return (
 		<>
 			<Title title={ title } />
 
-			<ProductForm product={ product } categories={ categories } />
+			<ProductForm product={ product ?? {} } categories={ categories } />
 		</>
 	);
 }

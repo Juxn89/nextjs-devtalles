@@ -1,13 +1,15 @@
-"use client";
+"use client"
 
-import { useForm } from 'react-hook-form';
-import { Categories, Product, ProductImage } from '@/interfaces';
-import Image from 'next/image';
-import clsx from 'clsx';
-import { createUpdateProduct } from '@/actions';
+import clsx from 'clsx'
+import Image from 'next/image'
+import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
+
+import { createUpdateProduct } from '@/actions'
+import { Categories, Product, ProductImage } from '@/interfaces'
 
 interface Props {
-	product: Product & { ProductImages?: ProductImage[] };
+	product: Partial<Product> & { ProductImages?: ProductImage[] };
 	categories: Categories[]
 }
 
@@ -23,14 +25,18 @@ interface FormInputs {
 	tags: string,
 	gender: 'men'|'women'|'kid'|'unisex',
 	categoryId: string
+	images?: FileList
 }
 
 export const ProductForm = ({ product, categories }: Props) => {
+	const router = useRouter()
+
 	const { handleSubmit, register, formState: { isValid}, getValues, setValue, watch } = useForm<FormInputs>({
 		defaultValues: {
 			...product,
-			tags: product.tags.join(', '),
-			sizes: product.sizes ?? []
+			tags: product.tags?.join(', '),
+			sizes: product.sizes ?? [],
+			images: undefined
 		}
 	})
 
@@ -39,6 +45,7 @@ export const ProductForm = ({ product, categories }: Props) => {
 	const onSizeChanged = (size: string) => {
 		const sizes = new Set(getValues('sizes'))
 
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		sizes.has(size) ? sizes.delete(size) : sizes.add(size)
 
 		setValue('sizes', Array.from(sizes))
@@ -47,9 +54,11 @@ export const ProductForm = ({ product, categories }: Props) => {
 	const onSubmit = async (data: FormInputs) => {
 		const formData = new FormData()
 
-		const { ...productToSave } = data
+		const { images, ...productToSave } = data
 
-		formData.append('id', product.id ?? '')
+		if(product.id)
+			formData.append('id', product.id ?? '')
+		
 		formData.append('title', productToSave.title)
 		formData.append('slug', productToSave.slug)
 		formData.append('description', productToSave.description)
@@ -60,7 +69,20 @@ export const ProductForm = ({ product, categories }: Props) => {
 		formData.append('gender', productToSave.gender)
 		formData.append('categoryId', productToSave.categoryId)
 
-		const {} = await createUpdateProduct(formData)
+		if(images) {
+			for(const image in images) {
+				formData.append('images', image)
+			}
+		}
+
+		const { ok, product: productTransaction } = await createUpdateProduct(formData)
+
+		if(!ok) {
+			alert('Error in the transaction')
+			return
+		}
+
+		router.replace(`/admin/product/${productTransaction?.slug}`)
 	}
 
 	return (
@@ -92,6 +114,11 @@ export const ProductForm = ({ product, categories }: Props) => {
 				<div className="flex flex-col mb-2">
 					<span>Price</span>
 					<input type="number" className="p-2 border rounded-md bg-gray-200" { ...register('price', { required: true, min: 0 }) } />
+				</div>
+
+				<div className="flex flex-col mb-2">
+					<span>Stock</span>
+					<input type="number" className="p-2 border rounded-md bg-gray-200" { ...register('inStock', { required: true, min: 0 }) } />
 				</div>
 
 				<div className="flex flex-col mb-2">
@@ -151,12 +178,12 @@ export const ProductForm = ({ product, categories }: Props) => {
 					</div>
 
 					<div className="flex flex-col mb-2">
-						<span>Fotos</span>
+						<span>Photos</span>
 						<input
 							type="file"
 							multiple
 							className="p-2 border rounded-md bg-gray-200"
-							accept="image/png, image/jpeg"
+							accept="image/png, image/jpeg, image/avif"
 						/>
 					</div>
 					
