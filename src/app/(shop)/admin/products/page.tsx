@@ -1,10 +1,9 @@
 import Link from "next/link";
-import { IoCardOutline } from "react-icons/io5";
+import Image from "next/image";
 
+import { currencyFormat } from "@/utils";
 import { Pagination, Title } from "@/components";
 import { getPaginatedProductsWithImages } from "@/actions";
-import Image from "next/image";
-import { currencyFormat } from "@/utils";
 
 interface Props {
 	searchParams: {
