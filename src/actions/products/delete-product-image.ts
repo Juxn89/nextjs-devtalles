@@ -5,9 +5,7 @@ import { revalidatePath } from 'next/cache';
 
 cloudinary.config(process.env.CLOUDINARY_URL ?? '')
 
-export const deleteProductImage = async (imageId: number, imageUrl: string) => {
-	console.log(imageId, imageUrl)
-	
+export const deleteProductImage = async (imageId: number, imageUrl: string) => {	
 	if(!imageUrl.startsWith('http'))
 		return { ok: false, error: 'It is not possible to delete an image from the file systems.' }
 
