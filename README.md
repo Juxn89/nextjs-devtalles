@@ -75,6 +75,21 @@ All code and notes are for personal learning and experimentation.
       <li>🔗 Global user modifications and additional user fields</li>
     </ul>
   </div>
+  <div style="min-width: 260px; max-width: 700px; border-radius: 14px; box-shadow: 0 2px 8px #0001; padding: 1.5rem;">
+    <h3 style="margin-top:0;">04-teslo-shop</h3>
+    <ul style="text-align: left; list-style: none; padding-left: 0;">
+      <li>🛍️ Minimal e‑commerce demo built with Next.js + Prisma</li>
+      <li>🐳 Dockerized Postgres database for local development</li>
+      <li>🗄️ Database schema & migrations with <b>Prisma</b> and seeding scripts</li>
+      <li>🔐 Authentication with <b>Auth.js</b> (credentials & OAuth providers)</li>
+      <li>💳 Payment integration using <b>PayPal</b> (sandbox + production flow)</li>
+      <li>📦 Image uploads handled via <b>Cloudinary</b></li>
+      <li>⚡ Next.js App Router (server & client components) + TypeScript</li>
+      <li>🎨 Styling with <b>Tailwind CSS</b> and utility-first patterns</li>
+      <li>🧪 Seed accounts for testing (admin/user) and quick start scripts</li>
+      <li>🛠️ Quick start & developer workflow (`.env.template`, `docker-compose`, Prisma commands)</li>
+    </ul>
+  </div>
 </div>
 
 ## 📚 Useful resources
