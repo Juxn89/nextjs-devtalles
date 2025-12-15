@@ -1,15 +1,15 @@
 "use client"
 
 import clsx from 'clsx'
-import Image from 'next/image'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 
-import { createUpdateProduct } from '@/actions'
-import { Categories, Product, ProductImage } from '@/interfaces'
+import { ProductImage } from '@/components'
+import { createUpdateProduct, deleteProductImage } from '@/actions'
+import { Categories, Product, ProductImage as IProductImage } from '@/interfaces'
 
 interface Props {
-	product: Partial<Product> & { ProductImages?: ProductImage[] };
+	product: Partial<Product> & { ProductImages?: IProductImage[] };
 	categories: Categories[]
 }
 
@@ -83,6 +83,10 @@ export const ProductForm = ({ product, categories }: Props) => {
 		}
 
 		router.replace(`/admin/product/${productTransaction?.slug}`)
+	}
+
+	const deleteImageHandler = async (image: IProductImage) => {
+		await deleteProductImage(image.id, image.url)
 	}
 
 	return (
@@ -191,18 +195,18 @@ export const ProductForm = ({ product, categories }: Props) => {
 						{
 							product.ProductImages?.map(image => (
 								<div key={ image.id }>
-									<Image
+									<ProductImage
 										alt={ product.title ?? '' }
 										width={300}
 										height={300}
-										src={ `/products/${image.url}` }
+										src={ image.url }
 										className='rounded-t shadow-md'
 									/>
 
 									<button 
 										className='btn-danger w-full rounded-b-xl' 
 										type='button'
-										onClick={ () => {  } }
+										onClick={ () => { deleteImageHandler(image) } }
 									>
 										Delete
 									</button>

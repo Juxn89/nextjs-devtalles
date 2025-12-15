@@ -10,6 +10,7 @@ export { getCountries } from './countries/get-countries'
 
 export { getStockBySlug } from './products/getStockBySlug'
 export { getProductBySlug } from './products/getProductBySlug'
+export { deleteProductImage } from './products/delete-product-image'
 export { createUpdateProduct } from './products/create-update-product'
 export { getPaginatedProductsWithImages } from './products/product-pagination'
 

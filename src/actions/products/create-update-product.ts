@@ -33,13 +33,13 @@ export const createUpdateProduct = async (product: FormData) => {
 	currentProduct.slug = currentProduct.slug.toLocaleLowerCase().replace(/ /g, '-').trim()
 
 	try {
-		const transaction = await prisma.$transaction(async (trasact) => {
+		const transaction = await prisma.$transaction(async (transact) => {
 			let productTransaction: Products
 			const tagsArray = rest.tags.split(',').map(tag => tag.trim().toLowerCase())
 
 			// Products
 			if(id) {
-				productTransaction = await prisma.products.update({
+				productTransaction = await transact.products.update({
 					where: { id },
 					data: {
 						...rest,
@@ -49,7 +49,7 @@ export const createUpdateProduct = async (product: FormData) => {
 				})
 			}
 			else {
-				productTransaction = await prisma.products.create({
+				productTransaction = await transact.products.create({
 					data: {
 						...rest,
 						size: { set: rest.sizes as Size[] },
@@ -60,7 +60,17 @@ export const createUpdateProduct = async (product: FormData) => {
 
 			// Images
 			if(product.getAll('images')) {
-				const imagesUrl = uploadImages(product.getAll('images') as File[])
+				const imagesUrl = await uploadImages(product.getAll('images') as File[])
+
+				if(!imagesUrl)
+					throw new Error('Failed to load images. Rollback executed.')
+
+				await transact.productImages.createMany({
+					data: imagesUrl.map(image => ({
+						url: image,
+						productId: currentProduct.id!,
+					}))
+				})
 			}
 
 			return {
