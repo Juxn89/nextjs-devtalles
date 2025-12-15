@@ -1,10 +1,10 @@
 'use client'
 
-import Link from "next/link"
-import { useEffect, useState } from "react"
-import { useCartStore } from "@/store"
-import { currencyFormat } from "@/utils/currenctFormat"
-import { sleep } from "@/utils"
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+
+import { useCartStore } from '@/store'
+import { currencyFormat } from '@/utils/currenctFormat'
 
 export const OrderSummary = () => {	
 	const [loaded, setLoaded] = useState(false)

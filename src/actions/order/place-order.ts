@@ -111,9 +111,10 @@ export const placeOrder = async (productToOrder: ProductToOrder[], address: Addr
 			order: placeOrderTransaction.order
 		}
 	} catch (error) {
+		console.log(error)
 		return {
 			ok: false,
-			message: error.message
+			message: 'Something was wrong'
 		}
 	}
 }

@@ -1,8 +1,9 @@
 'use server'
 
-import { PayPalAuthResult, PayPalOrdersStatusResponse } from "@/interfaces"
-import prisma from "@/lib/prisma"
-import { revalidatePath } from "next/cache"
+import { revalidatePath } from 'next/cache'
+
+import prisma from '@/lib/prisma'
+import { PayPalAuthResult, PayPalOrdersStatusResponse } from '@/interfaces'
 
 export const paypalCheckPayment = async (paypalTransactionId: string) => {
 	const authToken = await getPayPalAccessToken()

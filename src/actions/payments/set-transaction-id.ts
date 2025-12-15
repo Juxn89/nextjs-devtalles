@@ -1,7 +1,7 @@
 'use server'
 
-import { auth } from "@/auth.config"
-import prisma from "@/lib/prisma"
+import prisma from '@/lib/prisma'
+import { auth } from '@/auth.config'
 
 export const setTransactionId = async (orderId: string, transactionId: string) => {
 	try{
@@ -44,6 +44,7 @@ export const setTransactionId = async (orderId: string, transactionId: string) =
 
 	}
 	catch(error){
+		console.log(error)
 		return {
 			ok: false,
 			message: 'Failed to set transaction ID'

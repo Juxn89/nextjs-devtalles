@@ -1,10 +1,10 @@
 'use client'
 
-import Image from 'next/image'
+import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
+
 import { useCartStore } from '@/store'
 import { ProductImage, QuantitySelector } from '@/components'
-import Link from 'next/link'
 
 export const ProductsInCart = () => {
 	const productsInCart = useCartStore(state => state.cart)

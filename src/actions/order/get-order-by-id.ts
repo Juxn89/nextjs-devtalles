@@ -52,6 +52,7 @@ export const getOrderByID = async (id: string) => {
 		}
 	}
 	catch(error) {
+		console.log(error)
 		return {
 			ok: false,
 			message: 'There was an error fetching your order. Please, reach out to support.'

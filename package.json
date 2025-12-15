@@ -11,7 +11,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "seed": "npx prisma db seed"
+    "seed": "npx prisma db seed",
+		"prisma": "npx prisma migrate deploy && prisma generate"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

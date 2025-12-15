@@ -1,8 +1,9 @@
 'use server'
 
-import { auth } from "@/auth.config"
-import prisma from "@/lib/prisma"
-import { revalidatePath } from "next/cache"
+import prisma from '@/lib/prisma'
+import { revalidatePath } from 'next/cache'
+
+import { auth } from '@/auth.config'
 
 export const changeUserRole = async(userId: string, role: string) => {
 	const session = await auth()
@@ -27,6 +28,7 @@ export const changeUserRole = async(userId: string, role: string) => {
 			ok: true
 		}
 	} catch (error) {
+		console.log(error)
 		return {
 			ok: false,
 			message: 'Something was wrong.'
